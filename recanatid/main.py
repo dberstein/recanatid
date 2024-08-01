@@ -130,23 +130,27 @@ def delete_user(id):
     return ""
 
 
-def start(port=8080):
+default_port = 8080
+parser = argparse.ArgumentParser(
+    prog="recanatid",
+    description="Recanati HTTP daemon for REST API",
+    epilog="Text at the bottom of help",
+)
+parser.add_argument(
+    "port",
+    default=default_port,
+    help=f"Listen to port number (default: {default_port})",
+    nargs="?",
+    type=int,
+)
+
+args = parser.parse_args()
+
+def start(port=None):
+    if port is None:
+        port = default_port
     app.run("127.0.0.1", port)
 
 
 if __name__ == "__main__":
-    default_port = 8080
-    parser = argparse.ArgumentParser(
-        prog="recanatid",
-        description="Recanati HTTP daemon for REST API",
-        epilog="Text at the bottom of help",
-    )
-    parser.add_argument(
-        "port",
-        default=default_port,
-        help=f"Listen to port number (default: {default_port})",
-        nargs="?",
-        type=int,
-    )
-    args = parser.parse_args()
     start(args.port)

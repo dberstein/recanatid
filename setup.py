@@ -8,10 +8,10 @@ setup(
     author="Daniel Berstein",
     author_email="daniel@basegeo.com",
     license="MIT",
-    packages=find_packages(),
+    packages=['recanatid'],
     entry_points={
         "console_scripts": [
-            "recanatid=recanatid:main",
+            "recanatid=recanatid.main:start",
         ]
     },
 )
