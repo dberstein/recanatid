@@ -15,7 +15,7 @@ from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 
 from pydantic.dataclasses import dataclass
-
+from .config import DEFAULT_PORT
 
 @dataclass
 class User:
@@ -134,11 +134,10 @@ parser = argparse.ArgumentParser(
     description="Recanati HTTP daemon for REST API",
 )
 
-default_port = 8080
 parser.add_argument(
     "port",
-    default=default_port,
-    help=f"Listen to port number (default: {default_port})",
+    default=DEFAULT_PORT,
+    help=f"Listen to port number (default: {DEFAULT_PORT})",
     nargs="?",
     type=int,
 )
