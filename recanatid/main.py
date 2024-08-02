@@ -43,7 +43,6 @@ jwt = JWTManager(app)
 users = {
     "admin": generate_password_hash("secret"),
 }
-print(users)
 
 
 @auth.verify_password
@@ -130,12 +129,12 @@ def delete_user(id):
     return ""
 
 
-default_port = 8080
 parser = argparse.ArgumentParser(
     prog="recanatid",
     description="Recanati HTTP daemon for REST API",
-    epilog="Text at the bottom of help",
 )
+
+default_port = 8080
 parser.add_argument(
     "port",
     default=default_port,
@@ -144,13 +143,11 @@ parser.add_argument(
     type=int,
 )
 
-args = parser.parse_args()
 
-def start(port=None):
-    if port is None:
-        port = default_port
-    app.run("127.0.0.1", port)
+def start():
+    args = parser.parse_args()
+    app.run("127.0.0.1", args.port)
 
 
 if __name__ == "__main__":
-    start(args.port)
+    start()
