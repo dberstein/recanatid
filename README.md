@@ -4,6 +4,7 @@ Installation:
 $ python -m venv venv \
 && . ./venv/bin/activate \
 && pip install -r requirements.txt
+&& pip install -e .
 ```
 
 Run:
@@ -11,7 +12,10 @@ Run:
 ```
 $ python src/recanatid/main.py
 ```
-
+or
+```
+$ recanatid [-h] [port]
+```
 Notes:
 
 - Every startup uses generated random secret for JWT. Meaning that restarts invalidates all JWT tokens.
