@@ -16,16 +16,14 @@ from flask_jwt_extended import JWTManager
 
 from pydantic.dataclasses import dataclass
 from config import DEFAULT_PORT
+from db import get_db
+
 
 @dataclass
 class User:
     id: str
     name: str
     email: str
-
-
-def get_db():
-    return sqlite3.connect("rest.db")
 
 
 get_db().cursor().execute(
