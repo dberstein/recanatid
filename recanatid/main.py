@@ -1,18 +1,10 @@
-import argparse
-from flask import Flask, request
-import random
-import string
-from flask_httpauth import HTTPBasicAuth
-from werkzeug.security import generate_password_hash, check_password_hash
-import sqlite3
-
-from flask import jsonify
-
 import os
-from flask_jwt_extended import create_access_token
-from flask_jwt_extended import get_jwt_identity
-from flask_jwt_extended import jwt_required
-from flask_jwt_extended import JWTManager
+import argparse
+
+from flask import Flask, request, jsonify
+from flask_httpauth import HTTPBasicAuth
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from pydantic.dataclasses import dataclass
 from config import DEFAULT_PORT
