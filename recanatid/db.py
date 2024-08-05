@@ -1,5 +1,5 @@
 import sqlite3
-from config import DEFAULT_DATABASE
+from .config import DEFAULT_DATABASE
 
 
 def get_db():

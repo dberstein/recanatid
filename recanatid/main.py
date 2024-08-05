@@ -1,14 +1,20 @@
+import datetime
 import os
 import argparse
 
 from flask import Flask, request, jsonify
 from flask_httpauth import HTTPBasicAuth
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
+from flask_jwt_extended import (
+    create_access_token,
+    get_jwt_identity,
+    jwt_required,
+    JWTManager,
+)
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from pydantic.dataclasses import dataclass
-from config import DEFAULT_PORT
-from db import get_db
+from .config import DEFAULT_PORT, ACCESS_TOKEN_EXPIRES
+from .db import get_db
 
 
 @dataclass
@@ -27,7 +33,8 @@ auth = HTTPBasicAuth()
 
 # Setup the Flask-JWT-Extended extension
 app.config["JWT_SECRET_KEY"] = os.urandom(15).hex()
-# print(f"JWT_SECRET_KEY: {app.config["JWT_SECRET_KEY"]}")
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = ACCESS_TOKEN_EXPIRES
+app.config["JWT_DECODE_AUDIENCE"] = "standard"
 jwt = JWTManager(app)
 
 users = {
@@ -52,7 +59,6 @@ def login():
     password = request.json.get("password", None)
     if username != "admin" or password != "secret":
         return jsonify({"msg": "Bad username or password"}), 401
-
     access_token = create_access_token(identity=username)
     return jsonify(access_token=access_token)
 
