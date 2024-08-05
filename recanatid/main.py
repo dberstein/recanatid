@@ -13,8 +13,8 @@ from flask_jwt_extended import (
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from pydantic.dataclasses import dataclass
-from .config import DEFAULT_PORT, ACCESS_TOKEN_EXPIRES
-from .db import get_db
+from recanatid.config import DEFAULT_PORT, ACCESS_TOKEN_EXPIRES
+from recanatid.db import get_db
 
 
 @dataclass
